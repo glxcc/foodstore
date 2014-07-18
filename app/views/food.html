@@ -5,10 +5,16 @@
     <div class="panel panel-default row">
         <div class="col-xs-3">
             <!-- Categories -->
+            <a ng-click="selectCategory()"
+               class="btn btn-block btn-default btn-lg">Home</a>
+
+            <a ng-repeat="item in food.products | orderBy:'category' | unique:'category'"
+               ng-click="selectCategory(item)" class="btn btn-block btn-default btn-lg">{{item}}
+            </a>
         </div>
         <div class="col-xs-8">
             <!-- Products -->
-            <div class="well" ng-repeat="item in food.products">
+            <div class="well" ng-repeat="item in food.products | filter:categoryFilterFn">
                 <h3>
                     <strong>{{item.name}}</strong>
                     <span class="pull-right label label-primary">{{item.price | currency}}</span>

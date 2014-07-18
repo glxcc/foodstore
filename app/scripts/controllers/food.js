@@ -1,11 +1,11 @@
+'use strict';
+
 /**
  * Created by nlg on 16/07/2014.
  */
 
-'use strict';
-
 angular.module('foodstoreApp')
-    .controller('FoodCtrl', function ($scope) {
+    .controller('FoodCtrl', function ($scope , $filter) {
         $scope.food = {
             products: [
                 {name: 'product #1', description: 'product 1', category: 'cat1', price: 100},
@@ -14,4 +14,18 @@ angular.module('foodstoreApp')
                 {name: 'product #4', description: ' product 4', category: 'cat4', price: 400}
             ]
         }
+
+        /**
+         * select product category
+         */
+        var selectedCategory = null;
+        $scope.selectedCategory = function(newCategory){
+            selectedCategory = newCategory;
+        }
+
+        $scope.categoryFilterFn = function(product){
+            return selectedCategory == null || product.category == selectedCategory;
+        }
+
+
     });
